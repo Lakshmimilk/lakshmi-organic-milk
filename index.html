@@ -13,7 +13,7 @@
       color: #333;
     }
     header {
-      background: #2e7d32;
+      background: #fbc02d;
       color: white;
       padding: 1rem;
       text-align: center;
@@ -38,8 +38,13 @@
     .product h3 {
       margin-top: 0;
     }
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
     .btn {
-      background: #2e7d32;
+      background: #fbc02d;
       color: white;
       border: none;
       padding: 0.5rem 1rem;
@@ -52,7 +57,7 @@
       border-radius: 10px;
     }
     footer {
-      background: #2e7d32;
+      background: #fbc02d;
       color: white;
       text-align: center;
       padding: 1rem;
@@ -73,16 +78,19 @@
   <section class="products">
     <h2>Our Products</h2>
     <div class="product">
+      <img src="https://via.placeholder.com/400x300?text=Full+Cream+Milk" alt="Full Cream Milk" />
       <h3>Full Cream Milk</h3>
       <p>Rich and creamy. ₹60/L</p>
       <button class="btn" onclick="addToCart('Full Cream Milk', 60)">Add to Cart</button>
     </div>
     <div class="product">
+      <img src="https://via.placeholder.com/400x300?text=Cow+Milk" alt="Cow Milk" />
       <h3>Cow Milk</h3>
       <p>Light and healthy. ₹55/L</p>
       <button class="btn" onclick="addToCart('Cow Milk', 55)">Add to Cart</button>
     </div>
     <div class="product">
+      <img src="https://via.placeholder.com/400x300?text=Ghee" alt="Ghee" />
       <h3>Ghee</h3>
       <p>Pure homemade ghee. ₹450/500ml</p>
       <button class="btn" onclick="addToCart('Ghee', 450)">Add to Cart</button>
