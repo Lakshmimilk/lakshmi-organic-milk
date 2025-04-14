@@ -20,6 +20,9 @@
     a.btn { background: #fbc02d; color: white; padding: 0.6rem 1.2rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem; }
     .form-section { background: white; border-radius: 10px; padding: 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-top: 2rem; }
     .form-section input { width: 100%; padding: 0.5rem; margin-bottom: 1rem; }
+    .cart { margin-top: 2rem; padding: 1rem; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.1); border-radius: 10px; }
+    .cart ul { list-style: none; padding: 0; }
+    .cart ul li { margin-bottom: 1rem; }
   </style>
 </head>
 <body>
@@ -40,56 +43,73 @@
     <h2>Our Products</h2>
     <div class="products">
       <!-- Full Cream Milk -->
-      <div class="product-card">
+      <div class="product-card" id="product1">
         <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Full Cream Milk 250ml">
         <h3>Full Cream Milk - 250ml</h3>
         <p>₹25 / 250ml</p>
+        <button class="add-to-cart" data-name="Full Cream Milk - 250ml" data-price="25">Add to Cart</button>
       </div>
-      <div class="product-card">
+      <div class="product-card" id="product2">
         <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Full Cream Milk 500ml">
         <h3>Full Cream Milk - 500ml</h3>
         <p>₹50 / 500ml</p>
+        <button class="add-to-cart" data-name="Full Cream Milk - 500ml" data-price="50">Add to Cart</button>
       </div>
-      <div class="product-card">
+      <div class="product-card" id="product3">
         <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Full Cream Milk 1L">
         <h3>Full Cream Milk - 1L</h3>
         <p>₹100 / 1L</p>
+        <button class="add-to-cart" data-name="Full Cream Milk - 1L" data-price="100">Add to Cart</button>
       </div>
 
       <!-- Cow & Buffalo Milk -->
-      <div class="product-card">
+      <div class="product-card" id="product4">
         <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Cow & Buffalo Milk 250ml">
         <h3>Cow & Buffalo Milk - 250ml</h3>
         <p>₹39 / 250ml</p>
+        <button class="add-to-cart" data-name="Cow & Buffalo Milk - 250ml" data-price="39">Add to Cart</button>
       </div>
-      <div class="product-card">
+      <div class="product-card" id="product5">
         <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Cow & Buffalo Milk 500ml">
         <h3>Cow & Buffalo Milk - 500ml</h3>
         <p>₹78 / 500ml</p>
+        <button class="add-to-cart" data-name="Cow & Buffalo Milk - 500ml" data-price="78">Add to Cart</button>
       </div>
-      <div class="product-card">
+      <div class="product-card" id="product6">
         <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Cow & Buffalo Milk 1L">
         <h3>Cow & Buffalo Milk - 1L</h3>
         <p>₹155 / 1L</p>
+        <button class="add-to-cart" data-name="Cow & Buffalo Milk - 1L" data-price="155">Add to Cart</button>
       </div>
 
       <!-- Ghee -->
-      <div class="product-card">
+      <div class="product-card" id="product7">
         <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Ghee 250ml">
         <h3>Ghee - 250ml</h3>
         <p>₹725 / 250ml</p>
+        <button class="add-to-cart" data-name="Ghee - 250ml" data-price="725">Add to Cart</button>
       </div>
-      <div class="product-card">
+      <div class="product-card" id="product8">
         <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Ghee 500ml">
         <h3>Ghee - 500ml</h3>
         <p>₹1450 / 500ml</p>
+        <button class="add-to-cart" data-name="Ghee - 500ml" data-price="1450">Add to Cart</button>
       </div>
-      <div class="product-card">
+      <div class="product-card" id="product9">
         <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Ghee 1L">
         <h3>Ghee - 1L</h3>
         <p>₹2900 / 1L</p>
+        <button class="add-to-cart" data-name="Ghee - 1L" data-price="2900">Add to Cart</button>
       </div>
     </div>
+  </section>
+
+  <section class="cart">
+    <h2>Your Cart</h2>
+    <ul id="cart-items">
+      <!-- Cart items will appear here -->
+    </ul>
+    <button id="view-cart" class="btn">View Cart</button>
   </section>
 
   <section class="about">
@@ -97,29 +117,12 @@
     <p>We are passionate about organic and natural dairy products. Our milk and ghee are produced with love and care to ensure you enjoy the highest quality, freshness, and nutrition.</p>
   </section>
 
-  <!-- Delivery & Pickup -->
   <section class="form-section">
     <h2>Delivery/Pickup Information</h2>
-    <form id="orderForm">
-      <input type="text" placeholder="Full Name" required />
-      <input type="text" placeholder="Address" required />
-      <input type="text" placeholder="Contact Number" required />
-      <input type="email" placeholder="Email ID" required />
-
-      <h3>Select Delivery or Pickup</h3>
-      <label><input type="radio" name="deliveryMethod" value="Delivery" required /> Delivery</label>
-      <label><input type="radio" name="deliveryMethod" value="Pickup" required /> Pickup</label>
-      <br /><br />
-
-      <label>Select Date:</label>
-      <input type="date" required />
-
-      <h3>Payment Method</h3>
-      <label><input type="radio" name="paymentMethod" value="UPI" required /> UPI (PhonePe, Google Pay, etc.)</label>
-      <label><input type="radio" name="paymentMethod" value="COD" required /> Cash on Delivery</label>
-
-      <button type="submit" class="btn">Place Order</button>
-    </form>
+    <input type="text" placeholder="Full Name" required />
+    <input type="text" placeholder="Address" required />
+    <input type="text" placeholder="Contact Number" required />
+    <input type="email" placeholder="Email ID" required />
   </section>
 
   <section class="contact">
@@ -134,27 +137,35 @@
 </footer>
 
 <script>
-  // Handle order form submission and generate order ID
-  document.getElementById('orderForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent actual form submission for demo purposes
+  const cart = [];
 
-    const formData = new FormData(this);
-    const orderDetails = {
-      name: formData.get('name'),
-      address: formData.get('address'),
-      contact: formData.get('contact'),
-      email: formData.get('email'),
-      deliveryMethod: formData.get('deliveryMethod'),
-      date: formData.get('date'),
-      paymentMethod: formData.get('paymentMethod'),
-    };
+  // Handle adding products to cart
+  document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', (event) => {
+      const name = event.target.getAttribute('data-name');
+      const price = event.target.getAttribute('data-price');
 
-    // Generate Order ID (simple random number generation)
-    const orderId = 'ORD' + Math.floor(Math.random() * 1000000);
-    console.log('Order Details:', orderDetails);
-    console.log('Generated Order ID:', orderId);
+      const product = { name, price, quantity: 1 };
+      cart.push(product);
+      updateCart();
+    });
+  });
 
-    alert('Order placed successfully! Your Order ID is ' + orderId + '. We will contact you shortly.');
+  // Update cart display
+  function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.name} - ₹${item.price} x ${item.quantity}`;
+      cartItems.appendChild(li);
+    });
+  }
+
+  // View cart functionality
+  document.getElementById('view-cart').addEventListener('click', () => {
+    alert('Cart: ' + cart.map(item => `${item.name} x${item.quantity}`).join(', '));
   });
 </script>
 
