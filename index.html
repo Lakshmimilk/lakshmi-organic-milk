@@ -41,51 +41,51 @@
     <div class="products">
       <!-- Full Cream Milk -->
       <div class="product-card">
-        <img src="https://example.com/full-cream-250ml.jpg" alt="Full Cream Milk 250ml"> <!-- Replace with your actual image link -->
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Full Cream Milk 250ml">
         <h3>Full Cream Milk - 250ml</h3>
         <p>₹25 / 250ml</p>
       </div>
       <div class="product-card">
-        <img src="https://example.com/full-cream-500ml.jpg" alt="Full Cream Milk 500ml"> <!-- Replace with your actual image link -->
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Full Cream Milk 500ml">
         <h3>Full Cream Milk - 500ml</h3>
         <p>₹50 / 500ml</p>
       </div>
       <div class="product-card">
-        <img src="https://example.com/full-cream-1L.jpg" alt="Full Cream Milk 1L"> <!-- Replace with your actual image link -->
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Full Cream Milk 1L">
         <h3>Full Cream Milk - 1L</h3>
         <p>₹100 / 1L</p>
       </div>
 
       <!-- Cow & Buffalo Milk -->
       <div class="product-card">
-        <img src="https://example.com/cow-buffalo-250ml.jpg" alt="Cow & Buffalo Milk 250ml"> <!-- Replace with your actual image link -->
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Cow & Buffalo Milk 250ml">
         <h3>Cow & Buffalo Milk - 250ml</h3>
         <p>₹39 / 250ml</p>
       </div>
       <div class="product-card">
-        <img src="https://example.com/cow-buffalo-500ml.jpg" alt="Cow & Buffalo Milk 500ml"> <!-- Replace with your actual image link -->
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Cow & Buffalo Milk 500ml">
         <h3>Cow & Buffalo Milk - 500ml</h3>
         <p>₹78 / 500ml</p>
       </div>
       <div class="product-card">
-        <img src="https://example.com/cow-buffalo-1L.jpg" alt="Cow & Buffalo Milk 1L"> <!-- Replace with your actual image link -->
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Cow & Buffalo Milk 1L">
         <h3>Cow & Buffalo Milk - 1L</h3>
         <p>₹155 / 1L</p>
       </div>
 
       <!-- Ghee -->
       <div class="product-card">
-        <img src="https://example.com/ghee-250ml.jpg" alt="Ghee 250ml"> <!-- Replace with your actual image link -->
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Ghee 250ml">
         <h3>Ghee - 250ml</h3>
         <p>₹725 / 250ml</p>
       </div>
       <div class="product-card">
-        <img src="https://example.com/ghee-500ml.jpg" alt="Ghee 500ml"> <!-- Replace with your actual image link -->
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Ghee 500ml">
         <h3>Ghee - 500ml</h3>
         <p>₹1450 / 500ml</p>
       </div>
       <div class="product-card">
-        <img src="https://example.com/ghee-1L.jpg" alt="Ghee 1L"> <!-- Replace with your actual image link -->
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="Ghee 1L">
         <h3>Ghee - 1L</h3>
         <p>₹2900 / 1L</p>
       </div>
@@ -134,7 +134,7 @@
 </footer>
 
 <script>
-  // Handle order form submission
+  // Handle order form submission and generate order ID
   document.getElementById('orderForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent actual form submission for demo purposes
 
@@ -149,9 +149,12 @@
       paymentMethod: formData.get('paymentMethod'),
     };
 
+    // Generate Order ID (simple random number generation)
+    const orderId = 'ORD' + Math.floor(Math.random() * 1000000);
     console.log('Order Details:', orderDetails);
+    console.log('Generated Order ID:', orderId);
 
-    alert('Order placed successfully! We will contact you shortly.');
+    alert('Order placed successfully! Your Order ID is ' + orderId + '. We will contact you shortly.');
   });
 </script>
 
