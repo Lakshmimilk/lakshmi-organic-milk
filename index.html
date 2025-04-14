@@ -4,141 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lakshmi Organic Milk</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      background: #fff;
-      color: #333;
-    }
-    header {
-      background: url('https://source.unsplash.com/1600x600/?dairy,farm') no-repeat center center/cover;
-      height: 60vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-      text-align: center;
-    }
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    .section {
-      padding: 3rem 1.5rem;
-      max-width: 1100px;
-      margin: auto;
-    }
-    .intro {
-      text-align: center;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .product-card {
-      border: 1px solid #eee;
-      border-radius: 10px;
-      overflow: hidden;
-      text-align: center;
-      padding: 1rem;
-      background: #fafafa;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    .product-card img {
-      max-width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .product-card h3 {
-      margin-top: 1rem;
-    }
-    .product-card p {
-      font-weight: bold;
-      margin: 0.5rem 0;
-    }
-    .btn {
-      background: #fbc02d;
-      color: white;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .story {
-      background: #f9f9f9;
-      border-radius: 10px;
-      padding: 2rem;
-      line-height: 1.6;
-    }
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #fbc02d;
-      color: white;
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f7f7f7; color: #333; }
+    header, footer { background: #fbc02d; color: white; text-align: center; padding: 1.5rem 1rem; }
+    main { padding: 2rem; max-width: 1100px; margin: auto; }
+    .hero { text-align: center; padding: 2rem 1rem; background: white; border-radius: 10px; margin-bottom: 2rem; }
+    .hero img { width: 100%; max-width: 700px; border-radius: 10px; margin-top: 1rem; }
+    .section { margin-bottom: 2rem; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .product-card { background: white; border-radius: 10px; padding: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center; }
+    .product-card img { width: 100%; max-width: 200px; height: auto; border-radius: 5px; }
+    .product-card h3 { margin: 0.8rem 0 0.4rem; }
+    .about { background: white; border-radius: 10px; padding: 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .contact { text-align: center; margin-top: 2rem; }
+    a.btn { background: #fbc02d; color: white; padding: 0.6rem 1.2rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem; }
   </style>
 </head>
 <body>
 
 <header>
-  <div>
-    <h1>Lakshmi Organic Milk</h1>
-    <p>Pure. Fresh. Farm to Home.</p>
-  </div>
+  <h1>Lakshmi Organic Milk</h1>
+  <p>Pure. Fresh. Farm to Home.</p>
 </header>
 
-<section class="section intro">
-  <h2>Welcome to Our Farm</h2>
-  <p>We deliver fresh, organic milk and dairy products directly from our farm to your doorstep. Our cows are raised with love and care to ensure the highest quality milk for your family.</p>
-</section>
+<main>
+  <section class="hero">
+    <h2>Welcome to Lakshmi Organic Milk</h2>
+    <p>We take pride in supplying the highest quality products to our customers both locally and nationally, getting the milk from the farm to the customer in just 24 hours.</p>
+    <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Milk" />
+  </section>
 
-<section class="section">
-  <h2>Our Products</h2>
-  <div class="products">
-    <div class="product-card">
-      <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Full Cream Milk">
-      <h3>Full Cream Milk</h3>
-      <p>₹100 / 1L</p>
-      <button class="btn">Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Cow Milk">
-      <h3>Cow Milk</h3>
-      <p>₹155 / 1L</p>
-      <button class="btn">Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Ghee">
-      <h3>Ghee</h3>
-      <p>₹1450 / 500ml</p>
-      <button class="btn">Add to Cart</button>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Our Story</h2>
-  <div class="story">
-    <p>At Lakshmi Organic Milk, our journey started with a simple idea – bring natural, chemical-free milk to our community. Every drop of milk comes from cows that are nurtured with grass, clean water, and care. We're committed to ethical farming, sustainability, and ensuring our products reach your home fresh and safe.</p>
-  </div>
-</section>
-
-<section class="section intro">
-  <h2>Get In Touch</h2>
-  <p>Phone: +91 9876543210</p>
-  <p><a class="btn" href="https://wa.me/919876543210" target="_blank">Chat on WhatsApp</a></p>
-</section>
-
-<footer>
-  <p>&copy; 2025 Lakshmi Organic Milk. All rights reserved.</p>
-</footer>
-
-</body>
-</html>
+  <section class="section">
+    <h2>Our Products</h2>
+    <div class="products">
+      <div class="product-card">
+        <img src="https://via
