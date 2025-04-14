@@ -89,6 +89,12 @@
       text-align: center;
       padding: 1rem;
     }
+    .order-summary {
+      background-color: #f7f7f7;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
     @media(max-width: 600px) {
       .products, .cart, .contact {
         padding: 1rem;
@@ -151,11 +157,16 @@
     </div>
     <div id="codSection" style="margin-top: 1rem; display:none;">
       <h3>Choose Payment Method</h3>
-      <button class="btn" onclick="confirmOrder()">Confirm Order (COD)</button>
+      <button class="btn" onclick="showDeliveryOptions()">Confirm Order (COD)</button>
+    </div>
+    <div id="deliveryDateSection" style="display:none; margin-top: 1rem;">
+      <h3>Select Delivery Date</h3>
+      <input type="date" id="deliveryDate" />
     </div>
     <div id="orderConfirmation" style="display:none; margin-top: 1rem;">
       <h3>Order Confirmed</h3>
       <p>Your order number is: <strong id="orderNumber"></strong></p>
+      <p><strong>Delivery Date:</strong> <span id="deliveryDateSpan"></span></p>
       <p>Thank you for shopping with us!</p>
     </div>
   </section>
@@ -229,12 +240,18 @@
       updateCart();
     }
 
-    function confirmOrder() {
-      // Generate a random order number
-      const orderNumber = "ORD" + Math.floor(Math.random() * 1000000);
-      document.getElementById("orderNumber").innerText = orderNumber;
-      document.getElementById("orderConfirmation").style.display = "block";
+    function showDeliveryOptions() {
+      document.getElementById("deliveryDateSection").style.display = "block";
       document.getElementById("codSection").style.display = "none";
+    }
+
+    function confirmOrder() {
+      const orderNumber = "ORD" + Math.floor(Math.random() * 1000000);
+      const deliveryDate = document.getElementById("deliveryDate").value;
+      document.getElementById("orderNumber").innerText = orderNumber;
+      document.getElementById("deliveryDateSpan").innerText = deliveryDate;
+      document.getElementById("orderConfirmation").style.display = "block";
+      document.getElementById("deliveryDateSection").style.display = "none";
       document.getElementById("paymentInfo").style.display = "none";
     }
   </script>
