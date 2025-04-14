@@ -62,10 +62,23 @@
       text-align: center;
       padding: 1rem;
     }
-    .quantity {
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+    }
+    .quantity-btn {
+      background: #fbc02d;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.5rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .quantity-input {
       width: 50px;
-      padding: 0.2rem;
-      margin-right: 0.5rem;
+      text-align: center;
+      margin: 0 0.5rem;
     }
     @media(max-width: 600px) {
       .products, .cart, .contact {
@@ -86,21 +99,33 @@
       <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Dairy" />
       <h3>Full Cream Milk</h3>
       <p>Rich and creamy. ₹100/1L</p>
-      <input class="quantity" type="number" min="1" value="1" id="fullCreamMilkQuantity" />
+      <div class="quantity-controls">
+        <button class="quantity-btn" onclick="changeQuantity('fullCreamMilk', -1)">-</button>
+        <input class="quantity-input" type="number" id="fullCreamMilkQuantity" value="1" min="1" readonly />
+        <button class="quantity-btn" onclick="changeQuantity('fullCreamMilk', 1)">+</button>
+      </div>
       <button class="btn" onclick="addToCart('Full Cream Milk', 100, document.getElementById('fullCreamMilkQuantity').value)">Add to Cart</button>
     </div>
     <div class="product">
       <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Dairy" />
       <h3>Cow Milk</h3>
       <p>Light and healthy. ₹155/1L</p>
-      <input class="quantity" type="number" min="1" value="1" id="cowMilkQuantity" />
+      <div class="quantity-controls">
+        <button class="quantity-btn" onclick="changeQuantity('cowMilk', -1)">-</button>
+        <input class="quantity-input" type="number" id="cowMilkQuantity" value="1" min="1" readonly />
+        <button class="quantity-btn" onclick="changeQuantity('cowMilk', 1)">+</button>
+      </div>
       <button class="btn" onclick="addToCart('Cow Milk', 155, document.getElementById('cowMilkQuantity').value)">Add to Cart</button>
     </div>
     <div class="product">
       <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Dairy" />
       <h3>Ghee</h3>
       <p>Pure homemade ghee. ₹1450/500ml</p>
-      <input class="quantity" type="number" min="1" value="1" id="gheeQuantity" />
+      <div class="quantity-controls">
+        <button class="quantity-btn" onclick="changeQuantity('ghee', -1)">-</button>
+        <input class="quantity-input" type="number" id="gheeQuantity" value="1" min="1" readonly />
+        <button class="quantity-btn" onclick="changeQuantity('ghee', 1)">+</button>
+      </div>
       <button class="btn" onclick="addToCart('Ghee', 1450, document.getElementById('gheeQuantity').value)">Add to Cart</button>
     </div>
   </section>
@@ -129,6 +154,13 @@
 
   <script>
     const cart = [];
+
+    function changeQuantity(product, delta) {
+      const quantityInput = document.getElementById(`${product}Quantity`);
+      let currentQuantity = parseInt(quantityInput.value);
+      currentQuantity = Math.max(currentQuantity + delta, 1);  // Prevent quantity from going below 1
+      quantityInput.value = currentQuantity;
+    }
 
     function addToCart(item, price, quantity) {
       quantity = parseInt(quantity);
