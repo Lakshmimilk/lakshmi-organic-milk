@@ -2,263 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lakshmi Organic Milk</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f7f7;
-      color: #333;
-    }
-    header {
-      background: #fbc02d;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-    }
-    .tagline {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-    }
-    .products, .cart, .contact {
-      padding: 2rem;
-    }
-    .product {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 1rem;
-      margin: 1rem 0;
-    }
-    .product h3 {
-      margin-top: 0;
-    }
-    .product img {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-    .btn {
-      background: #fbc02d;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .cart-list {
-      background: white;
-      padding: 1rem;
-      border-radius: 10px;
-    }
-    .quantity-controls {
-      display: flex;
-      align-items: center;
-      margin-top: 1rem;
-    }
-    .quantity-btn {
-      background: #fbc02d;
-      color: white;
-      border: none;
-      padding: 0.3rem 0.5rem;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .quantity-input {
-      width: 50px;
-      text-align: center;
-      margin: 0 0.5rem;
-    }
-    .edit-btn {
-      background: #fbc02d;
-      color: white;
-      border: none;
-      padding: 0.3rem 0.5rem;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-left: 0.5rem;
-    }
-    footer {
-      background: #fbc02d;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
-    .order-summary {
-      background-color: #f7f7f7;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-top: 1rem;
-    }
-    @media(max-width: 600px) {
-      .products, .cart, .contact {
-        padding: 1rem;
-      }
-    }
+    body { font-family: Arial, sans-serif; background: #f7f7f7; color: #333; margin: 0; padding: 0; }
+    header, footer { background: #fbc02d; color: white; text-align: center; padding: 1rem; }
+    .section { padding: 2rem; }
+    .btn { background: #fbc02d; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 1rem; }
+    .hidden { display: none; }
+    .options { margin-top: 1rem; }
+    .summary { margin-top: 1rem; background: #fff; padding: 1rem; border-radius: 10px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Lakshmi Organic Milk</h1>
-    <p class="tagline">Pure. Fresh. Farm to Home.</p>
-  </header>
 
-  <section class="products">
-    <h2>Our Products</h2>
-    <div class="product">
-      <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Dairy" />
-      <h3>Full Cream Milk</h3>
-      <p>Rich and creamy. ₹100/1L</p>
-      <div class="quantity-controls">
-        <button class="quantity-btn" onclick="changeQuantity('fullCreamMilk', -1)">-</button>
-        <input class="quantity-input" type="number" id="fullCreamMilkQuantity" value="1" min="1" readonly />
-        <button class="quantity-btn" onclick="changeQuantity('fullCreamMilk', 1)">+</button>
-      </div>
-      <button class="btn" onclick="addToCart('Full Cream Milk', 100, document.getElementById('fullCreamMilkQuantity').value)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Dairy" />
-      <h3>Cow Milk</h3>
-      <p>Light and healthy. ₹155/1L</p>
-      <div class="quantity-controls">
-        <button class="quantity-btn" onclick="changeQuantity('cowMilk', -1)">-</button>
-        <input class="quantity-input" type="number" id="cowMilkQuantity" value="1" min="1" readonly />
-        <button class="quantity-btn" onclick="changeQuantity('cowMilk', 1)">+</button>
-      </div>
-      <button class="btn" onclick="addToCart('Cow Milk', 155, document.getElementById('cowMilkQuantity').value)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Dairy" />
-      <h3>Ghee</h3>
-      <p>Pure homemade ghee. ₹1450/500ml</p>
-      <div class="quantity-controls">
-        <button class="quantity-btn" onclick="changeQuantity('ghee', -1)">-</button>
-        <input class="quantity-input" type="number" id="gheeQuantity" value="1" min="1" readonly />
-        <button class="quantity-btn" onclick="changeQuantity('ghee', 1)">+</button>
-      </div>
-      <button class="btn" onclick="addToCart('Ghee', 1450, document.getElementById('gheeQuantity').value)">Add to Cart</button>
-    </div>
-  </section>
+<header>
+  <h1>Lakshmi Organic Milk</h1>
+  <p>Pure. Fresh. Farm to Home.</p>
+</header>
 
-  <section class="cart">
-    <h2>Your Cart</h2>
-    <div class="cart-list" id="cartList">
-      <p>No items in cart.</p>
-    </div>
-    <div id="paymentInfo" style="display:none; margin-top:1rem;">
-      <h3>Payment Instructions</h3>
-      <p>Pay via <strong>PhonePe</strong> to UPI ID: <strong>lakshmimilk@upi</strong></p>
-      <p>Once paid, contact us via WhatsApp with your order details.</p>
-    </div>
-    <div id="codSection" style="margin-top: 1rem; display:none;">
-      <h3>Choose Payment Method</h3>
-      <button class="btn" onclick="showDeliveryOptions()">Confirm Order (COD)</button>
-    </div>
-    <div id="deliveryDateSection" style="display:none; margin-top: 1rem;">
-      <h3>Select Delivery Date</h3>
-      <input type="date" id="deliveryDate" />
-      <button class="btn" onclick="confirmOrder()">Confirm Order</button>
-    </div>
-    <div id="orderConfirmation" style="display:none; margin-top: 1rem;">
-      <h3>Order Confirmed</h3>
-      <p>Your order number is: <strong id="orderNumber"></strong></p>
-      <p><strong>Delivery Date:</strong> <span id="deliveryDateSpan"></span></p>
-      <p>Thank you for shopping with us!</p>
-    </div>
-  </section>
+<section class="section">
+  <h2>Online Payment</h2>
+  <p>Pay using <strong>PhonePe</strong> to UPI ID: <strong>lakshmimilk@upi</strong></p>
+  <p>After payment, choose your preferred option:</p>
+  <div class="options">
+    <button class="btn" onclick="selectOption('delivery')">Home Delivery</button>
+    <button class="btn" onclick="selectOption('pickup')">Self Pickup</button>
+  </div>
 
-  <section class="contact">
-    <h2>Contact Us</h2>
-    <p>Phone: +91 9876543210</p>
-    <p><a href="https://wa.me/919876543210" class="btn">Chat on WhatsApp</a></p>
-  </section>
+  <div id="deliveryDateSection" class="hidden">
+    <h3>Select Delivery Date</h3>
+    <input type="date" id="deliveryDate" />
+    <button class="btn" onclick="confirmOrder('Delivery')">Confirm Delivery</button>
+  </div>
 
-  <footer>
-    <p>&copy; 2025 Lakshmi Organic Milk. All rights reserved.</p>
-  </footer>
+  <div id="pickupDateSection" class="hidden">
+    <h3>Select Pickup Date</h3>
+    <input type="date" id="pickupDate" />
+    <button class="btn" onclick="confirmOrder('Pickup')">Confirm Pickup</button>
+  </div>
 
-  <script>
-    const cart = [];
+  <div id="orderConfirmation" class="summary hidden">
+    <h3>Order Confirmed ✅</h3>
+    <p><strong>Order Number:</strong> <span id="orderNumber"></span></p>
+    <p><strong>Method:</strong> <span id="orderMethod"></span></p>
+    <p><strong>Date:</strong> <span id="orderDate"></span></p>
+    <p>Thank you for your order!</p>
+  </div>
+</section>
 
-    function changeQuantity(product, delta) {
-      const quantityInput = document.getElementById(`${product}Quantity`);
-      let currentQuantity = parseInt(quantityInput.value);
-      currentQuantity = Math.max(currentQuantity + delta, 1);  // Prevent quantity from going below 1
-      quantityInput.value = currentQuantity;
+<footer>
+  <p>&copy; 2025 Lakshmi Organic Milk. All rights reserved.</p>
+</footer>
+
+<script>
+  function selectOption(option) {
+    document.getElementById('deliveryDateSection').classList.add('hidden');
+    document.getElementById('pickupDateSection').classList.add('hidden');
+
+    if (option === 'delivery') {
+      document.getElementById('deliveryDateSection').classList.remove('hidden');
+    } else {
+      document.getElementById('pickupDateSection').classList.remove('hidden');
+    }
+  }
+
+  function confirmOrder(method) {
+    let dateInputId = method === 'Delivery' ? 'deliveryDate' : 'pickupDate';
+    let selectedDate = document.getElementById(dateInputId).value;
+
+    if (!selectedDate) {
+      alert('Please select a date!');
+      return;
     }
 
-    function addToCart(item, price, quantity) {
-      quantity = parseInt(quantity);
-      // Check if the item already exists in the cart
-      const existingProduct = cart.find(product => product.item === item);
-      if (existingProduct) {
-        existingProduct.quantity += quantity;
-      } else {
-        cart.push({ item, price, quantity });
-      }
-      updateCart();
-    }
+    const orderNumber = 'ORD' + Math.floor(Math.random() * 1000000);
 
-    function removeFromCart(index) {
-      cart.splice(index, 1);  // Remove the item at the given index
-      updateCart();
-    }
+    document.getElementById('orderNumber').innerText = orderNumber;
+    document.getElementById('orderMethod').innerText = method;
+    document.getElementById('orderDate').innerText = selectedDate;
+    document.getElementById('orderConfirmation').classList.remove('hidden');
+    
+    // Optional: hide other sections after confirmation
+    document.getElementById('deliveryDateSection').classList.add('hidden');
+    document.getElementById('pickupDateSection').classList.add('hidden');
+  }
+</script>
 
-    function updateCart() {
-      const cartList = document.getElementById("cartList");
-      if (cart.length === 0) {
-        cartList.innerHTML = "<p>No items in cart.</p>";
-        document.getElementById("paymentInfo").style.display = "none";
-        document.getElementById("codSection").style.display = "none";
-        return;
-      }
-
-      let html = "<ul>";
-      let total = 0;
-      cart.forEach((product, index) => {
-        html += `<li>
-                  ${product.item} - ₹${product.price} x <input type="number" value="${product.quantity}" min="1" onchange="updateItemQuantity(${index}, this.value)" /> 
-                  <button class="edit-btn" onclick="removeFromCart(${index})">Remove</button>
-                 </li>`;
-        total += product.price * product.quantity;
-      });
-      html += `</ul><p><strong>Total: ₹${total}</strong></p>`;
-      cartList.innerHTML = html;
-      document.getElementById("paymentInfo").style.display = "block";
-      document.getElementById("codSection").style.display = "block";
-    }
-
-    function updateItemQuantity(index, quantity) {
-      const newQuantity = parseInt(quantity);
-      if (newQuantity >= 1) {
-        cart[index].quantity = newQuantity;
-      }
-      updateCart();
-    }
-
-    function showDeliveryOptions() {
-      document.getElementById("deliveryDateSection").style.display = "block";
-      document.getElementById("codSection").style.display = "none";
-    }
-
-    function confirmOrder() {
-      const orderNumber = "ORD" + Math.floor(Math.random() * 1000000);
-      const deliveryDate = document.getElementById("deliveryDate").value;
-      if (deliveryDate === "") {
-        alert("Please select a delivery date.");
-        return;
-      }
-      document.getElementById("orderNumber").innerText = orderNumber;
-      document.getElementById("deliveryDateSpan").innerText = deliveryDate;
-      document.getElementById("orderConfirmation").style.display = "block";
-      document.getElementById("deliveryDateSection").style.display = "none";
-      document.getElementById("paymentInfo").style.display = "none";
-    }
-  </script>
 </body>
 </html>
