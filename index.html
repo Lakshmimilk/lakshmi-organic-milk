@@ -20,8 +20,6 @@
     a.btn { background: #fbc02d; color: white; padding: 0.6rem 1.2rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem; }
     .form-section { background: white; border-radius: 10px; padding: 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-top: 2rem; }
     .form-section input { width: 100%; padding: 0.5rem; margin-bottom: 1rem; }
-    .cart-box, .summary { background: #fff; padding: 1rem; border-radius: 10px; margin-top: 1rem; }
-    .btn-sm { font-size: 0.9rem; padding: 0.2rem 0.6rem; margin: 0 0.3rem; background: #fbc02d; color: white; border: none; border-radius: 5px; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -40,16 +38,86 @@
 
   <section class="section">
     <h2>Our Products</h2>
-    <div class="products" id="productList"></div>
-    <div class="cart-box" id="cartBox"><h3>Cart</h3><p>No items in cart.</p></div>
+    <div class="products">
+      <!-- Full Cream Milk -->
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Full Cream Milk 250ml">
+        <h3>Full Cream Milk - 250ml</h3>
+        <p>₹25 / 250ml</p>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Full Cream Milk 500ml">
+        <h3>Full Cream Milk - 500ml</h3>
+        <p>₹50 / 500ml</p>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Full Cream Milk 1L">
+        <h3>Full Cream Milk - 1L</h3>
+        <p>₹100 / 1L</p>
+      </div>
+
+      <!-- Cow & Buffalo Milk -->
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Cow & Buffalo Milk 250ml">
+        <h3>Cow & Buffalo Milk - 250ml</h3>
+        <p>₹39 / 250ml</p>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Cow & Buffalo Milk 500ml">
+        <h3>Cow & Buffalo Milk - 500ml</h3>
+        <p>₹78 / 500ml</p>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Cow & Buffalo Milk 1L">
+        <h3>Cow & Buffalo Milk - 1L</h3>
+        <p>₹155 / 1L</p>
+      </div>
+
+      <!-- Ghee -->
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Ghee 250ml">
+        <h3>Ghee - 250ml</h3>
+        <p>₹725 / 250ml</p>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Ghee 500ml">
+        <h3>Ghee - 500ml</h3>
+        <p>₹1450 / 500ml</p>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Ghee 1L">
+        <h3>Ghee - 1L</h3>
+        <p>₹2900 / 1L</p>
+      </div>
+    </div>
   </section>
 
+  <section class="about">
+    <h2>About Us</h2>
+    <p>We are passionate about organic and natural dairy products. Our milk and ghee are produced with love and care to ensure you enjoy the highest quality, freshness, and nutrition.</p>
+  </section>
+
+  <!-- Delivery & Pickup -->
   <section class="form-section">
-    <h2>Delivery Information</h2>
-    <input type="text" placeholder="Full Name" required />
-    <input type="text" placeholder="Address" required />
-    <input type="text" placeholder="Contact Number" required />
-    <input type="email" placeholder="Email ID" required />
+    <h2>Delivery/Pickup Information</h2>
+    <form>
+      <input type="text" placeholder="Full Name" required />
+      <input type="text" placeholder="Address" required />
+      <input type="text" placeholder="Contact Number" required />
+      <input type="email" placeholder="Email ID" required />
+
+      <h3>Select Delivery or Pickup</h3>
+      <label><input type="radio" name="deliveryMethod" value="Delivery" required /> Delivery</label>
+      <label><input type="radio" name="deliveryMethod" value="Pickup" required /> Pickup</label>
+      <br /><br />
+
+      <label>Select Date:</label>
+      <input type="date" required />
+
+      <h3>Payment Method</h3>
+      <label><input type="radio" name="paymentMethod" value="UPI" required /> UPI (PhonePe, Google Pay, etc.)</label>
+      <label><input type="radio" name="paymentMethod" value="COD" required /> Cash on Delivery</label>
+    </form>
   </section>
 
   <section class="contact">
@@ -62,68 +130,6 @@
 <footer>
   <p>&copy; 2025 Lakshmi Organic Milk. All rights reserved.</p>
 </footer>
-
-<script>
-const products = [
-  { name: 'Full Cream Milk', size: '250ml', price: 25 },
-  { name: 'Full Cream Milk', size: '500ml', price: 50 },
-  { name: 'Full Cream Milk', size: '1L', price: 100 },
-  { name: 'Cow & Buffalo Milk', size: '250ml', price: 39 },
-  { name: 'Cow & Buffalo Milk', size: '500ml', price: 78 },
-  { name: 'Cow & Buffalo Milk', size: '1L', price: 155 },
-  { name: 'Ghee', size: '250ml', price: 725 },
-  { name: 'Ghee', size: '500ml', price: 1450 },
-  { name: 'Ghee', size: '1L', price: 2900 },
-];
-
-let cart = {};
-
-function renderProducts() {
-  const productList = document.getElementById('productList');
-  productList.innerHTML = '';
-  products.forEach((product, index) => {
-    const id = `${product.name}-${product.size}`;
-    productList.innerHTML += `
-      <div class="product-card">
-        <img src="https://via.placeholder.com/200" alt="${product.name}" />
-        <h3>${product.name} - ${product.size}</h3>
-        <p>₹${product.price}</p>
-        <button class="btn-sm" onclick="updateCart('${id}', ${product.price}, -1)">-</button>
-        <span id="qty-${id}">0</span>
-        <button class="btn-sm" onclick="updateCart('${id}', ${product.price}, 1)">+</button>
-      </div>
-    `;
-  });
-}
-
-function updateCart(id, price, delta) {
-  if (!cart[id]) cart[id] = { price, qty: 0 };
-  cart[id].qty += delta;
-  if (cart[id].qty < 0) cart[id].qty = 0;
-  document.getElementById(`qty-${id}`).innerText = cart[id].qty;
-  renderCart();
-}
-
-function renderCart() {
-  const cartBox = document.getElementById('cartBox');
-  let total = 0;
-  let html = '<h3>Cart</h3><ul>';
-  let hasItems = false;
-  for (let id in cart) {
-    if (cart[id].qty > 0) {
-      hasItems = true;
-      const subtotal = cart[id].qty * cart[id].price;
-      html += `<li>${id} × ${cart[id].qty} - ₹${subtotal}</li>`;
-      total += subtotal;
-    }
-  }
-  html += '</ul>';
-  html += `<p><strong>Total: ₹${total}</strong></p>`;
-  cartBox.innerHTML = hasItems ? html : '<h3>Cart</h3><p>No items in cart.</p>';
-}
-
-renderProducts();
-</script>
 
 </body>
 </html>
