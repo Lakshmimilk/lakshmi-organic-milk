@@ -149,6 +149,15 @@
       <p>Pay via <strong>PhonePe</strong> to UPI ID: <strong>lakshmimilk@upi</strong></p>
       <p>Once paid, contact us via WhatsApp with your order details.</p>
     </div>
+    <div id="codSection" style="margin-top: 1rem; display:none;">
+      <h3>Choose Payment Method</h3>
+      <button class="btn" onclick="confirmOrder()">Confirm Order (COD)</button>
+    </div>
+    <div id="orderConfirmation" style="display:none; margin-top: 1rem;">
+      <h3>Order Confirmed</h3>
+      <p>Your order number is: <strong id="orderNumber"></strong></p>
+      <p>Thank you for shopping with us!</p>
+    </div>
   </section>
 
   <section class="contact">
@@ -193,6 +202,7 @@
       if (cart.length === 0) {
         cartList.innerHTML = "<p>No items in cart.</p>";
         document.getElementById("paymentInfo").style.display = "none";
+        document.getElementById("codSection").style.display = "none";
         return;
       }
 
@@ -208,6 +218,7 @@
       html += `</ul><p><strong>Total: ₹${total}</strong></p>`;
       cartList.innerHTML = html;
       document.getElementById("paymentInfo").style.display = "block";
+      document.getElementById("codSection").style.display = "block";
     }
 
     function updateItemQuantity(index, quantity) {
@@ -216,6 +227,15 @@
         cart[index].quantity = newQuantity;
       }
       updateCart();
+    }
+
+    function confirmOrder() {
+      // Generate a random order number
+      const orderNumber = "ORD" + Math.floor(Math.random() * 1000000);
+      document.getElementById("orderNumber").innerText = orderNumber;
+      document.getElementById("orderConfirmation").style.display = "block";
+      document.getElementById("codSection").style.display = "none";
+      document.getElementById("paymentInfo").style.display = "none";
     }
   </script>
 </body>
