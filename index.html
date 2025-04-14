@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lakshmi Organic Milk</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f7f7f7; color: #333; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; color: #333; }
     header, footer { background: #fbc02d; color: white; text-align: center; padding: 1rem; }
     .section { padding: 2rem; }
-    .btn { background: #fbc02d; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 1rem; }
+    .product { background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 1rem; margin-bottom: 1rem; }
+    .btn { background: #fbc02d; color: white; border: none; padding: 0.4rem 1rem; border-radius: 5px; cursor: pointer; }
+    .btn-sm { font-size: 0.9rem; padding: 0.2rem 0.6rem; margin: 0 0.3rem; }
+    .cart-box, .summary { background: #fff; padding: 1rem; border-radius: 10px; margin-top: 1rem; }
     .hidden { display: none; }
-    .options { margin-top: 1rem; }
-    .summary { margin-top: 1rem; background: #fff; padding: 1rem; border-radius: 10px; }
   </style>
 </head>
 <body>
@@ -22,10 +23,37 @@
 </header>
 
 <section class="section">
-  <h2>Online Payment</h2>
-  <p>Pay using <strong>PhonePe</strong> to UPI ID: <strong>lakshmimilk@upi</strong></p>
-  <p>After payment, choose your preferred option:</p>
-  <div class="options">
+  <h2>Products</h2>
+  <div class="product">
+    <h3>Full Cream Milk - ₹100</h3>
+    <button class="btn btn-sm" onclick="updateQty('Full Cream Milk', 100, -1)">-</button>
+    <span id="qty-Full Cream Milk">0</span>
+    <button class="btn btn-sm" onclick="updateQty('Full Cream Milk', 100, 1)">+</button>
+  </div>
+  <div class="product">
+    <h3>Cow Milk - ₹155</h3>
+    <button class="btn btn-sm" onclick="updateQty('Cow Milk', 155, -1)">-</button>
+    <span id="qty-Cow Milk">0</span>
+    <button class="btn btn-sm" onclick="updateQty('Cow Milk', 155, 1)">+</button>
+  </div>
+  <div class="product">
+    <h3>Ghee - ₹1450</h3>
+    <button class="btn btn-sm" onclick="updateQty('Ghee', 1450, -1)">-</button>
+    <span id="qty-Ghee">0</span>
+    <button class="btn btn-sm" onclick="updateQty('Ghee', 1450, 1)">+</button>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Your Cart</h2>
+  <div class="cart-box" id="cartList">
+    <p>No items in cart.</p>
+  </div>
+
+  <div id="paymentSection" class="hidden">
+    <h3>Online Payment</h3>
+    <p>Pay via <strong>PhonePe</strong> to UPI ID: <strong>lakshmimilk@upi</strong></p>
+    <p>After payment, choose:</p>
     <button class="btn" onclick="selectOption('delivery')">Home Delivery</button>
     <button class="btn" onclick="selectOption('pickup')">Self Pickup</button>
   </div>
@@ -47,45 +75,95 @@
     <p><strong>Order Number:</strong> <span id="orderNumber"></span></p>
     <p><strong>Method:</strong> <span id="orderMethod"></span></p>
     <p><strong>Date:</strong> <span id="orderDate"></span></p>
-    <p>Thank you for your order!</p>
+    <h4>Items:</h4>
+    <ul id="confirmedItems"></ul>
+    <p><strong>Total: ₹<span id="confirmedTotal"></span></strong></p>
   </div>
 </section>
 
 <footer>
-  <p>&copy; 2025 Lakshmi Organic Milk. All rights reserved.</p>
+  <p>&copy; 2025 Lakshmi Organic Milk</p>
 </footer>
 
 <script>
-  function selectOption(option) {
-    document.getElementById('deliveryDateSection').classList.add('hidden');
-    document.getElementById('pickupDateSection').classList.add('hidden');
+  let cart = {};
 
-    if (option === 'delivery') {
-      document.getElementById('deliveryDateSection').classList.remove('hidden');
+  function updateQty(item, price, change) {
+    if (!cart[item]) cart[item] = { price, qty: 0 };
+    cart[item].qty += change;
+    if (cart[item].qty < 0) cart[item].qty = 0;
+    document.getElementById(`qty-${item}`).innerText = cart[item].qty;
+    updateCartDisplay();
+  }
+
+  function updateCartDisplay() {
+    const cartList = document.getElementById("cartList");
+    let html = "";
+    let total = 0;
+    let hasItems = false;
+
+    html += "<ul>";
+    for (let item in cart) {
+      if (cart[item].qty > 0) {
+        hasItems = true;
+        let subtotal = cart[item].price * cart[item].qty;
+        html += `<li>${item} × ${cart[item].qty} - ₹${subtotal}</li>`;
+        total += subtotal;
+      }
+    }
+    html += "</ul>";
+
+    if (!hasItems) {
+      cartList.innerHTML = "<p>No items in cart.</p>";
+      document.getElementById("paymentSection").classList.add("hidden");
     } else {
-      document.getElementById('pickupDateSection').classList.remove('hidden');
+      html += `<p><strong>Total: ₹${total}</strong></p>`;
+      cartList.innerHTML = html;
+      document.getElementById("paymentSection").classList.remove("hidden");
+    }
+  }
+
+  function selectOption(option) {
+    document.getElementById("deliveryDateSection").classList.add("hidden");
+    document.getElementById("pickupDateSection").classList.add("hidden");
+    if (option === "delivery") {
+      document.getElementById("deliveryDateSection").classList.remove("hidden");
+    } else {
+      document.getElementById("pickupDateSection").classList.remove("hidden");
     }
   }
 
   function confirmOrder(method) {
-    let dateInputId = method === 'Delivery' ? 'deliveryDate' : 'pickupDate';
-    let selectedDate = document.getElementById(dateInputId).value;
+    let date = method === "Delivery"
+      ? document.getElementById("deliveryDate").value
+      : document.getElementById("pickupDate").value;
 
-    if (!selectedDate) {
-      alert('Please select a date!');
+    if (!date) {
+      alert("Please select a date.");
       return;
     }
 
-    const orderNumber = 'ORD' + Math.floor(Math.random() * 1000000);
+    const orderNumber = "ORD" + Math.floor(100000 + Math.random() * 900000);
+    let total = 0;
+    let itemsHtml = "";
 
-    document.getElementById('orderNumber').innerText = orderNumber;
-    document.getElementById('orderMethod').innerText = method;
-    document.getElementById('orderDate').innerText = selectedDate;
-    document.getElementById('orderConfirmation').classList.remove('hidden');
-    
-    // Optional: hide other sections after confirmation
-    document.getElementById('deliveryDateSection').classList.add('hidden');
-    document.getElementById('pickupDateSection').classList.add('hidden');
+    for (let item in cart) {
+      if (cart[item].qty > 0) {
+        let lineTotal = cart[item].qty * cart[item].price;
+        itemsHtml += `<li>${item} × ${cart[item].qty} - ₹${lineTotal}</li>`;
+        total += lineTotal;
+      }
+    }
+
+    document.getElementById("orderNumber").innerText = orderNumber;
+    document.getElementById("orderMethod").innerText = method;
+    document.getElementById("orderDate").innerText = date;
+    document.getElementById("confirmedItems").innerHTML = itemsHtml;
+    document.getElementById("confirmedTotal").innerText = total;
+
+    document.getElementById("orderConfirmation").classList.remove("hidden");
+    document.getElementById("deliveryDateSection").classList.add("hidden");
+    document.getElementById("pickupDateSection").classList.add("hidden");
   }
 </script>
 
