@@ -62,6 +62,11 @@
       text-align: center;
       padding: 1rem;
     }
+    .quantity {
+      width: 50px;
+      padding: 0.2rem;
+      margin-right: 0.5rem;
+    }
     @media(max-width: 600px) {
       .products, .cart, .contact {
         padding: 1rem;
@@ -81,21 +86,22 @@
       <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Dairy" />
       <h3>Full Cream Milk</h3>
       <p>Rich and creamy. ₹100/1L</p>
-      <button class="btn" onclick="addToCart('Full Cream Milk', 100)">Add to Cart</button>
+      <input class="quantity" type="number" min="1" value="1" id="fullCreamMilkQuantity" />
+      <button class="btn" onclick="addToCart('Full Cream Milk', 100, document.getElementById('fullCreamMilkQuantity').value)">Add to Cart</button>
     </div>
     <div class="product">
       <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Dairy" />
-
       <h3>Cow Milk</h3>
       <p>Light and healthy. ₹155/1L</p>
-      <button class="btn" onclick="addToCart('Cow Milk', 155)">Add to Cart</button>
+      <input class="quantity" type="number" min="1" value="1" id="cowMilkQuantity" />
+      <button class="btn" onclick="addToCart('Cow Milk', 155, document.getElementById('cowMilkQuantity').value)">Add to Cart</button>
     </div>
     <div class="product">
       <img src="https://www.bordbia.ie/globalassets/bordbia.ie/industry/foodalerts/2019/september/organic-dairy-source.png" alt="Organic Dairy" />
-
       <h3>Ghee</h3>
       <p>Pure homemade ghee. ₹1450/500ml</p>
-      <button class="btn" onclick="addToCart('Ghee', 1450)">Add to Cart</button>
+      <input class="quantity" type="number" min="1" value="1" id="gheeQuantity" />
+      <button class="btn" onclick="addToCart('Ghee', 1450, document.getElementById('gheeQuantity').value)">Add to Cart</button>
     </div>
   </section>
 
@@ -124,8 +130,11 @@
   <script>
     const cart = [];
 
-    function addToCart(item, price) {
-      cart.push({ item, price });
+    function addToCart(item, price, quantity) {
+      quantity = parseInt(quantity);
+      for (let i = 0; i < quantity; i++) {
+        cart.push({ item, price });
+      }
       updateCart();
     }
 
