@@ -56,12 +56,6 @@
       padding: 1rem;
       border-radius: 10px;
     }
-    footer {
-      background: #fbc02d;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
     .quantity-controls {
       display: flex;
       align-items: center;
@@ -79,6 +73,21 @@
       width: 50px;
       text-align: center;
       margin: 0 0.5rem;
+    }
+    .edit-btn {
+      background: #fbc02d;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.5rem;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-left: 0.5rem;
+    }
+    footer {
+      background: #fbc02d;
+      color: white;
+      text-align: center;
+      padding: 1rem;
     }
     @media(max-width: 600px) {
       .products, .cart, .contact {
@@ -164,9 +173,18 @@
 
     function addToCart(item, price, quantity) {
       quantity = parseInt(quantity);
-      for (let i = 0; i < quantity; i++) {
-        cart.push({ item, price });
+      // Check if the item already exists in the cart
+      const existingProduct = cart.find(product => product.item === item);
+      if (existingProduct) {
+        existingProduct.quantity += quantity;
+      } else {
+        cart.push({ item, price, quantity });
       }
+      updateCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);  // Remove the item at the given index
       updateCart();
     }
 
@@ -180,13 +198,24 @@
 
       let html = "<ul>";
       let total = 0;
-      cart.forEach(product => {
-        html += `<li>${product.item} - ₹${product.price}</li>`;
-        total += product.price;
+      cart.forEach((product, index) => {
+        html += `<li>
+                  ${product.item} - ₹${product.price} x <input type="number" value="${product.quantity}" min="1" onchange="updateItemQuantity(${index}, this.value)" /> 
+                  <button class="edit-btn" onclick="removeFromCart(${index})">Remove</button>
+                 </li>`;
+        total += product.price * product.quantity;
       });
       html += `</ul><p><strong>Total: ₹${total}</strong></p>`;
       cartList.innerHTML = html;
       document.getElementById("paymentInfo").style.display = "block";
+    }
+
+    function updateItemQuantity(index, quantity) {
+      const newQuantity = parseInt(quantity);
+      if (newQuantity >= 1) {
+        cart[index].quantity = newQuantity;
+      }
+      updateCart();
     }
   </script>
 </body>
