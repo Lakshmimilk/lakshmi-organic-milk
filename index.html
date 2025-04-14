@@ -162,6 +162,7 @@
     <div id="deliveryDateSection" style="display:none; margin-top: 1rem;">
       <h3>Select Delivery Date</h3>
       <input type="date" id="deliveryDate" />
+      <button class="btn" onclick="confirmOrder()">Confirm Order</button>
     </div>
     <div id="orderConfirmation" style="display:none; margin-top: 1rem;">
       <h3>Order Confirmed</h3>
@@ -248,6 +249,10 @@
     function confirmOrder() {
       const orderNumber = "ORD" + Math.floor(Math.random() * 1000000);
       const deliveryDate = document.getElementById("deliveryDate").value;
+      if (deliveryDate === "") {
+        alert("Please select a delivery date.");
+        return;
+      }
       document.getElementById("orderNumber").innerText = orderNumber;
       document.getElementById("deliveryDateSpan").innerText = deliveryDate;
       document.getElementById("orderConfirmation").style.display = "block";
