@@ -17,11 +17,14 @@
     .product-card { background: white; border-radius: 10px; padding: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center; }
     .product-card img { width: 100%; max-width: 200px; height: auto; border-radius: 5px; }
     .product-card h3 { margin: 0.8rem 0 0.4rem; }
+    .cart { margin-top: 2rem; background: white; padding: 1rem; border-radius: 10px; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .cart-item span { flex: 1; }
     .about { background: white; border-radius: 10px; padding: 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-top: 2rem; }
     .contact { text-align: center; margin-top: 2rem; }
     a.btn { background: #fbc02d; color: white; padding: 0.6rem 1.2rem; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 1rem; }
+    .form-section input, .form-section select { width: 100%; padding: 0.5rem; margin-bottom: 1rem; }
     .form-section { background: white; border-radius: 10px; padding: 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-top: 2rem; }
-    .form-section input { width: 100%; padding: 0.5rem; margin-bottom: 1rem; }
     .order-confirm { background: #e0f7fa; border: 2px solid #4dd0e1; color: #006064; padding: 1rem; border-radius: 10px; margin-top: 2rem; display: none; text-align: center; }
     button { background: #4caf50; color: white; padding: 0.6rem 1.2rem; border: none; border-radius: 5px; cursor: pointer; }
   </style>
@@ -45,26 +48,37 @@
 
   <section class="section">
     <h2>Our Products</h2>
-    <div class="products">
-      <!-- Product cards remain unchanged -->
-      <!-- ... -->
-    </div>
+    <div class="products" id="productList"></div>
+  </section>
+
+  <section class="cart">
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
   </section>
 
   <section class="form-section">
-    <h2>Delivery Information</h2>
+    <h2>Order Details</h2>
     <form id="orderForm">
       <input type="text" id="fullName" placeholder="Full Name" required />
       <input type="text" id="address" placeholder="Address" required />
       <input type="text" id="contact" placeholder="Contact Number" required />
       <input type="email" id="email" placeholder="Email ID" required />
-      <button type="submit">Submit Order</button>
+      <select id="deliveryType">
+        <option value="delivery">Delivery</option>
+        <option value="pickup">Pickup</option>
+      </select>
+      <input type="date" id="date" required />
+      <select id="payment">
+        <option value="cod">Cash on Delivery</option>
+        <option value="upi">UPI Reference</option>
+      </select>
+      <button type="submit">Place Order</button>
     </form>
   </section>
 
   <div class="order-confirm" id="orderConfirm">
     <h3>Thank you for your order!</h3>
-    <p>We have received your details. Our team will contact you shortly to confirm the order and arrange delivery.</p>
+    <p>Your Order ID: <strong id="orderId"></strong></p>
   </div>
 
   <section class="contact">
@@ -84,12 +98,80 @@
 </footer>
 
 <script>
+  const products = [
+    { name: "Organic Milk 250ml", price: 25 },
+    { name: "Organic Milk 500ml", price: 40 },
+    { name: "Organic Milk 1L", price: 70 },
+    { name: "Homemade Ghee 250ml", price: 200 },
+    { name: "Homemade Ghee 500ml", price: 380 },
+    { name: "Homemade Ghee 1L", price: 720 },
+    { name: "Natural Curd 250ml", price: 30 },
+    { name: "Natural Curd 500ml", price: 50 },
+    { name: "Natural Curd 1L", price: 90 },
+  ];
+
+  const cart = [];
+
+  function renderProducts() {
+    const container = document.getElementById('productList');
+    container.innerHTML = '';
+    products.forEach((product, index) => {
+      const div = document.createElement('div');
+      div.className = 'product-card';
+      div.innerHTML = `
+        <img src="https://www.pravarshaindustries.com/blog/wp-content/uploads/2023/05/Crystal-Sound-Kit-artwork-by-@starboyrob-1.jpg" alt="${product.name}" />
+        <h3>${product.name}</h3>
+        <p>₹${product.price}</p>
+        <button onclick="addToCart(${index})">Add to Cart</button>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function renderCart() {
+    const cartItems = document.getElementById('cartItems');
+    cartItems.innerHTML = '';
+    cart.forEach((item, index) => {
+      cartItems.innerHTML += `
+        <div class="cart-item">
+          <span>${item.name} (₹${item.price})</span>
+          <input type="number" value="${item.qty}" min="1" onchange="updateQty(${index}, this.value)" style="width: 60px" />
+          <button onclick="removeFromCart(${index})">Remove</button>
+        </div>
+      `;
+    });
+  }
+
+  function addToCart(index) {
+    const item = { ...products[index], qty: 1 };
+    const found = cart.find(p => p.name === item.name);
+    if (found) found.qty++;
+    else cart.push(item);
+    renderCart();
+  }
+
+  function updateQty(index, qty) {
+    cart[index].qty = parseInt(qty);
+    renderCart();
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    renderCart();
+  }
+
   document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    const orderId = 'ORD' + Math.floor(Math.random() * 1000000);
+    document.getElementById('orderId').textContent = orderId;
     document.getElementById('orderConfirm').style.display = 'block';
     this.reset();
+    cart.length = 0;
+    renderCart();
     window.scrollTo({ top: document.getElementById('orderConfirm').offsetTop, behavior: 'smooth' });
   });
+
+  renderProducts();
 </script>
 
 </body>
