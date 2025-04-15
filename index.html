@@ -6,8 +6,9 @@
   <title>Lakshmi Organic Milk</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f7f7f7; color: #333; }
-    header, footer { background: #fbc02d; color: white; text-align: center; padding: 1.5rem 1rem; }
-    header img.logo { max-height: 80px; margin-bottom: 0.5rem; }
+    header, footer { background: #fbc02d; color: white; padding: 1.5rem 1rem; display: flex; align-items: center; justify-content: space-between; }
+    header img.logo { max-height: 80px; margin-right: 1rem; }
+    header .header-title { flex-grow: 1; text-align: left; }
     main { padding: 2rem; max-width: 1100px; margin: auto; }
     .hero { text-align: center; padding: 2rem 1rem; background: white; border-radius: 10px; margin-bottom: 2rem; }
     .hero img { width: 100%; max-width: 700px; border-radius: 10px; margin-top: 1rem; }
@@ -27,8 +28,10 @@
 
 <header>
   <img src="https://img.freepik.com/premium-vector/organic-farm-logo_24877-3322.jpg?w=740" alt="Lakshmi Organic Milk Logo" class="logo" />
-  <h1>Lakshmi Organic Milk</h1>
-  <p>Pure. Fresh. Farm to Home.</p>
+  <div class="header-title">
+    <h1>Lakshmi Organic Milk</h1>
+    <p>Pure. Fresh. Farm to Home.</p>
+  </div>
 </header>
 
 <main>
@@ -97,15 +100,15 @@
     <input type="email" placeholder="Email ID" required />
   </section>
 
-  <section class="about">
-    <h2>About Us</h2>
-    <p>We are passionate about organic and natural dairy products. Our milk and ghee are produced with love and care to ensure you enjoy the highest quality, freshness, and nutrition.</p>
-  </section>
-
   <section class="contact">
     <h2>Contact Us</h2>
     <p>Phone: +91 9876543210</p>
     <a href="https://wa.me/919876543210" class="btn">Chat on WhatsApp</a>
+  </section>
+
+  <section class="about">
+    <h2>About Us</h2>
+    <p>We are passionate about organic and natural dairy products. Our milk and ghee are produced with love and care to ensure you enjoy the highest quality, freshness, and nutrition.</p>
   </section>
 </main>
 
